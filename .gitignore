@@ -1,0 +1,4 @@
+**/__pycache__
+node.json
+artifacts
+**/.pytest_cache
