@@ -70,7 +70,6 @@ func withdraw{
     return ()
 end
 
-# Increases the balance by the given amount.
 @external
 func flash_loan{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
         flash_loan_receiver: felt,
