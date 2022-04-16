@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: MIT
+# OpenZeppelin Cairo Contracts v0.1.0
+
 %lang starknet
 
 from starkware.cairo.common.registers import get_fp_and_pc
@@ -12,11 +15,11 @@ from starkware.cairo.common.hash_state import (
 )
 
 from contracts.lib.ERC165 import (
-    ERC165_supports_interface, 
+    ERC165_supports_interface,
     ERC165_register_interface
 )
 
-from contracts.utils.constants import PREFIX_TRANSACTION 
+from contracts.utils.constants import PREFIX_TRANSACTION
 
 #
 # Structs
@@ -84,7 +87,7 @@ func Account_get_public_key{
 end
 
 func Account_get_nonce{
-        syscall_ptr : felt*, 
+        syscall_ptr : felt*,
         pedersen_ptr : HashBuiltin*,
         range_check_ptr
     }() -> (res: felt):
@@ -97,7 +100,7 @@ end
 #
 
 func Account_set_public_key{
-        syscall_ptr : felt*, 
+        syscall_ptr : felt*,
         pedersen_ptr : HashBuiltin*,
         range_check_ptr
     }(new_public_key: felt):
@@ -111,7 +114,7 @@ end
 #
 
 func Account_initializer{
-        syscall_ptr : felt*, 
+        syscall_ptr : felt*,
         pedersen_ptr : HashBuiltin*,
         range_check_ptr
     }(_public_key: felt):
@@ -127,9 +130,9 @@ end
 
 @view
 func Account_is_valid_signature{
-        syscall_ptr : felt*, 
+        syscall_ptr : felt*,
         pedersen_ptr : HashBuiltin*,
-        range_check_ptr, 
+        range_check_ptr,
         ecdsa_ptr: SignatureBuiltin*
     }(
         hash: felt,
@@ -155,9 +158,9 @@ end
 
 
 func Account_execute{
-        syscall_ptr : felt*, 
+        syscall_ptr : felt*,
         pedersen_ptr : HashBuiltin*,
-        range_check_ptr, 
+        range_check_ptr,
         ecdsa_ptr: SignatureBuiltin*
     }(
         call_array_len: felt,
@@ -214,7 +217,7 @@ func execute_list{syscall_ptr: felt*}(
     if calls_len == 0:
        return (0)
     end
-    
+
     # do the current call
     let this_call: Call = [calls]
     let res = call_contract(
@@ -231,7 +234,7 @@ func execute_list{syscall_ptr: felt*}(
 end
 
 func hash_multicall{
-        syscall_ptr: felt*, 
+        syscall_ptr: felt*,
         pedersen_ptr: HashBuiltin*
     } (
         multicall: MultiCall*
@@ -326,7 +329,7 @@ func from_call_array_to_call{syscall_ptr: felt*}(
     if call_array_len == 0:
        return ()
     end
-    
+
     # parse the current call
     assert [calls] = Call(
             to=[call_array].to,
@@ -334,7 +337,7 @@ func from_call_array_to_call{syscall_ptr: felt*}(
             calldata_len=[call_array].data_len,
             calldata=calldata + [call_array].data_offset
         )
-    
+
     # parse the remaining calls recursively
     from_call_array_to_call(call_array_len - 1, call_array + AccountCallArray.SIZE, calldata, calls + Call.SIZE)
     return ()

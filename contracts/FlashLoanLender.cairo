@@ -98,7 +98,6 @@ func flash_fee{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr
     let (local _fee_ppm) = fee.read()
     let (local _fee_ppm_amount, _: Uint256) = uint256_mul(Uint256(_fee_ppm, 0), amount)
     let (local _fee, _: Uint256) = uint256_unsigned_div_rem(_fee_ppm_amount, Uint256(FEE_BASE, 0))
-    # let (local _fee, _: Uint256) = uint256_unsigned_div_rem(uint256_mul(fee.read(), amount), Uint256(FEE_BASE, 0))
     return (_fee)
 end
 
