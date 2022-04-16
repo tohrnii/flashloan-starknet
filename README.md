@@ -27,4 +27,4 @@ pytest tests/test_flash_loan.py -s
 
 ## Credits
 
-This repo is based on standard cairo contract library by @OpenZeppelin : [Repo](https://github.com/OpenZeppelin/cairo-contracts)
+This repo is based on standard cairo contract library by [@OpenZeppelin](https://github.com/OpenZeppelin) : [Repo](https://github.com/OpenZeppelin/cairo-contracts)
